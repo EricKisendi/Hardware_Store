@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Loader from '../components/Loader'; // Assuming you have a custom loader component
+import Loader from '../components/Preliminaries/Loader'; // Assuming you have a custom loader component
 
 const ProductPage = () => {
   const { id } = useParams(); // Get product ID from URL
