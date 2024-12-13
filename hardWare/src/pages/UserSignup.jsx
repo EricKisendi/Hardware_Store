@@ -1,32 +1,39 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Replaced useHistory with useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const UserSignup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setMessage('');
+    setLoading(true);
+
     try {
       await axios.post('http://localhost:5000/api/user/signup', { email, password, name });
       setMessage('Signup successful! You can now login.');
       navigate('/login'); // Redirect to login page after successful signup
     } catch (error) {
-      console.error('Signup failed:', error); // Log the error to the console for debugging
-      setMessage('Signup failed. Please try again.');
+      console.error('Signup failed:', error);
+      if (error.response && error.response.data.message) {
+        setMessage(error.response.data.message); // Specific error from backend
+      } else {
+        setMessage('Signup failed. Please try again.');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        onSubmit={handleSignup}
-      >
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSignup}>
         <h2 className="text-2xl mb-4">User Signup</h2>
 
         <div className="mb-4">
@@ -58,7 +65,7 @@ const UserSignup = () => {
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             type="password"
-            placeholder="Password"
+            placeholder="Password (min 6 characters)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -69,8 +76,9 @@ const UserSignup = () => {
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
+            disabled={loading}
           >
-            Signup
+            {loading ? 'Signing up...' : 'Signup'}
           </button>
         </div>
 

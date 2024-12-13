@@ -1,23 +1,27 @@
-import { useState } from 'react';
+// src/pages/UserLogin.jsx
+import { useState, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Replaced useHistory with useNavigate
+import { AuthContext } from '../context/AuthContext'; // Import AuthContext correctly
 
 const UserLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const { login } = useContext(AuthContext); // Get the login function from AuthContext
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/user/login', { email, password });
-      localStorage.setItem('userToken', response.data.token); // Store JWT token
-      setMessage('Login successful');
-      navigate('/dashboard'); // Redirect after successful login
+      const response = await axios.post('http://localhost:5000/api/user/login', {
+        email,
+        password,
+      });
+      login(response.data.token); // Call login from context with the received token
     } catch (error) {
-      console.error('Login error:', error); // Log the error to the console for debugging
-      setMessage('Login failed. Please check your credentials.');
+      console.error('Login error:', error);
+      setMessage(
+        error.response?.data?.message || 'Login failed. Please check your credentials.'
+      );
     }
   };
 
