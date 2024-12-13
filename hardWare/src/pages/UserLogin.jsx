@@ -2,12 +2,14 @@
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext'; // Import AuthContext correctly
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 
 const UserLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const { login } = useContext(AuthContext); // Get the login function from AuthContext
+  const navigate = useNavigate(); // Initialize navigate for redirection
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -16,7 +18,21 @@ const UserLogin = () => {
         email,
         password,
       });
-      login(response.data.token); // Call login from context with the received token
+
+      // Store the token in localStorage
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+
+      // Optionally store user info if provided by the backend
+      if (response.data.user) {
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+      }
+
+      // Call login function from context to update auth state
+      login(token);
+
+      // Redirect to the dashboard or home page
+      navigate('/dashboard');
     } catch (error) {
       console.error('Login error:', error);
       setMessage(
