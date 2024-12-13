@@ -1,23 +1,58 @@
 import { useEffect } from 'react';
-import useCart from '../context/useCart'; // Correct default import
+import useCart from '../context/useCart'; // Custom hook for cart context
 import { removeFromCart, updateCart } from '../api/cartApi';
+import { useNavigate } from 'react-router-dom'; // For redirection
+import axios from 'axios'; // To make the checkout request
 
 const Cart = () => {
   const { cart, fetchCart, loading } = useCart();
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCart();
   }, [fetchCart]);
 
+  // Remove an item from the cart
   const handleRemove = async (productId) => {
     await removeFromCart(productId, token);
     fetchCart();
   };
 
+  // Update the quantity of an item in the cart
   const handleUpdateQuantity = async (productId, quantity) => {
     await updateCart(productId, quantity, token);
     fetchCart();
+  };
+
+  // Handle the checkout process
+  const handleCheckout = async () => {
+    try {
+      // Prepare the data for the checkout request
+      const orderData = {
+        items: cart.items.map((item) => ({
+          product: item.product._id,
+          quantity: item.quantity,
+        })),
+        total: cart.total,
+        address: '123 Main St, Anytown, USA', // Replace this with a real address input if needed
+      };
+
+      // Send POST request to the backend checkout endpoint
+      const response = await axios.post('http://localhost:5000/api/orders', orderData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      // Handle success (redirect or show success message)
+      console.log('Order Success:', response.data);
+      navigate('/checkout'); // Redirect to a success page
+    } catch (error) {
+      console.error('Checkout Error:', error.response?.data?.message || error.message);
+      alert('Checkout failed. Please try again.');
+    }
   };
 
   if (loading) return <p className="text-center text-xl font-semibold">Loading...</p>;
@@ -78,7 +113,10 @@ const Cart = () => {
       {cart && cart.items.length > 0 && (
         <div className="flex justify-between items-center mt-6">
           <h3 className="text-xl font-semibold">Total: ${cart?.total.toFixed(2)}</h3>
-          <button className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 focus:outline-none">
+          <button
+            className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 focus:outline-none"
+            onClick={handleCheckout}
+          >
             Checkout
           </button>
         </div>
