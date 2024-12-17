@@ -10,7 +10,12 @@ const Dropdown = () => {
     { name: 'Hand Tools', path: 'hand-tools' },
     { name: 'Building Materials', path: 'building-materials' },
     { name: 'Safety Equipment', path: 'safety-equipment' },
-    { name: 'Electrical', path: 'electrical' }
+    { name: 'Electrical', path: 'electrical' },
+    { name: 'Plumbing', path: 'plumbing' },
+    { name: 'Hardware Accessories', path: 'hardware-accessories' },
+    { name: 'Paint & Supplies', path: 'paint-supplies' },
+    { name: 'Gardening Tools', path: 'gardening-tools' },
+    { name: 'Fasteners', path: 'fasteners' },
   ];
 
   return (
@@ -21,7 +26,13 @@ const Dropdown = () => {
     >
       <button className="hover:text-yellow-500">Products</button>
       {isOpen && (
-        <div className="absolute top-full mt-2 bg-gray-800 text-white rounded shadow-lg p-4">
+        <div className="absolute top-full mt-2 z-50 bg-gray-800 text-white rounded shadow-lg w-48 max-h-64 overflow-y-auto">
+          <Link
+            to="/products"
+            className="block px-4 py-2 hover:bg-gray-700 font-semibold border-b border-gray-700"
+          >
+            All Products
+          </Link>
           {categories.map((category) => (
             <Link
               key={category.name}

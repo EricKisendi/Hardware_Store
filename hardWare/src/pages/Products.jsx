@@ -55,14 +55,14 @@ const Products = () => {
                   alt={product.name}
                   className="w-full h-48 object-cover mb-2 rounded"
                 />
-                <h2 className="text-lg font-semibold">{product.name}</h2>
-                <p className="text-gray-700">${product.price.toFixed(2)}</p>
-                <p className="text-sm text-gray-500">{product.description}</p>
+            <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
+                <p className="text-sm text-gray-700">{product.description}</p>
                 <p className="text-sm text-gray-600">Stock: {product.stock}</p>
+                <p className="text-lg font-bold mt-2">${product.price.toFixed(2)}</p>
               </Link>
-              <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+              {/* <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                 Add to Cart
-              </button>
+              </button> */}
             </div>
           ))}
         </div>
