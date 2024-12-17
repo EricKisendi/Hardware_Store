@@ -16,6 +16,7 @@ import { CartProvider } from './context/CartContext';
 import AuthProvider from './context/AuthProvider';
 import PrivateRoute from './components/PrivateRoute';
 import CheckoutPage from './pages/CheckoutPage.jsx';
+import Checkout from './pages/Checkout';
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/login" element={<UserLogin />} />
             <Route path="/signup" element={<UserSignup />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/checkout1" element={<Checkout />} />
             <Route
               path="/dashboard"
               element={

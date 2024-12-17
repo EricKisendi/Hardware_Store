@@ -11,10 +11,14 @@ const HamburgerMenu = () => {
     { name: 'Safety Equipment', path: 'safety-equipment' },
     { name: 'Electrical', path: 'electrical' },
     { name: 'Plumbing', path: 'plumbing' },
-    { name: 'Hardware Accessories', path: 'hardware-accessories' },
-    { name: 'Paint & Supplies', path: 'paint-supplies' },
-    { name: 'Gardening Tools', path: 'gardening-tools' },
-    { name: 'Fasteners', path: 'fasteners' },
+    { name: 'Carpentry', path: 'carpentry' },
+    { name: 'Paint & Supplies', path: 'paints' },
+    { name: 'Steel', path: 'steel' },
+    { name: 'Glues', path: 'glues' },
+    { name: 'Gas', path: 'gas' },
+    { name: 'Curtains', path: 'curtains' },
+    { name: 'Cement', path: 'cement' },
+    { name: 'Home Equipment', path: 'home-equipment' },
   ];
 
   return (

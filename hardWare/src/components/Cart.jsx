@@ -3,6 +3,7 @@ import useCart from '../context/useCart'; // Custom hook for cart context
 import { removeFromCart, updateCart } from '../api/cartApi';
 import { useNavigate } from 'react-router-dom'; // For redirection
 import axios from 'axios'; // To make the checkout request
+// import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const { cart, fetchCart, loading } = useCart();
@@ -48,7 +49,7 @@ const Cart = () => {
 
       // Handle success (redirect or show success message)
       console.log('Order Success:', response.data);
-      navigate('/checkout'); // Redirect to a success page
+      navigate('/checkout1'); // Redirect to a success page
     } catch (error) {
       console.error('Checkout Error:', error.response?.data?.message || error.message);
       alert('Checkout failed. Please try again.');
@@ -121,6 +122,13 @@ const Cart = () => {
           </button>
         </div>
       )}
+
+      {/* This is another approach button to make facilitae payment by connecting user to the owner via whatsapp and email */}
+      {/* <Link to="/checkout1">
+        <button className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
+          Proceed to Checkout
+        </button>
+      </Link> */}
     </div>
   );
 };
