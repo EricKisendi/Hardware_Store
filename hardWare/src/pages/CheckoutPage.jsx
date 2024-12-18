@@ -30,7 +30,7 @@ const CheckoutPage = () => {
         cvv: paymentDetails.cvv,
       };
 
-      const response = await axios.post('http://localhost:5000/api/payment', paymentData, {
+      const response = await axios.post('https://hardware-backend-gqcn.onrender.com/api/payment', paymentData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

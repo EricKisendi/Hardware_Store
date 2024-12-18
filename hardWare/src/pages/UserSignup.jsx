@@ -16,7 +16,7 @@ const UserSignup = () => {
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:5000/api/user/signup', { email, password, name });
+      await axios.post('https://hardware-backend-gqcn.onrender.com/api/user/signup', { email, password, name });
       setMessage('Signup successful! You can now login.');
       navigate('/login'); // Redirect to login page after successful signup
     } catch (error) {

@@ -40,7 +40,7 @@ const Cart = () => {
       };
 
       // Send POST request to the backend checkout endpoint
-      const response = await axios.post('http://localhost:5000/api/orders', orderData, {
+      const response = await axios.post('https://hardware-backend-gqcn.onrender.com/api/orders', orderData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

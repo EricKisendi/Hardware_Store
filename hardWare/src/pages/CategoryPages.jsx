@@ -13,7 +13,7 @@ const CategoryPage = () => {
       setLoading(true); // Show a loading state
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/category/${encodeURIComponent(category)}`
+          `https://hardware-backend-gqcn.onrender.com/api/products/category/${encodeURIComponent(category)}`
         );
         setProducts(response.data);
       } catch (error) {

@@ -14,7 +14,7 @@ const Products = () => {
   const fetchProducts = async (page) => {
     try {
       setLoading(true); // Start loading
-      const response = await axios.get(`http://localhost:5000/api/products?page=${page}&limit=${limit}`);
+      const response = await axios.get(`https://hardware-backend-gqcn.onrender.com/api/products?page=${page}&limit=${limit}`);
       const { products, totalPages } = response.data;
       setProducts(products);
       setTotalPages(totalPages);

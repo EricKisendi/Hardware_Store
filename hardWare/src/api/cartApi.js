@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL for API
-const API_URL = 'http://localhost:5000/api/cart';
+const API_URL = 'https://hardware-backend-gqcn.onrender.com/api/cart';
 
 // Add product to cart
 export const addToCart = async (productId, quantity, token) => {

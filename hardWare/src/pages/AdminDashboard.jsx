@@ -17,7 +17,7 @@ const AdminDashboard = () => {
 
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.post('/api/admin/add-product', product, {
+      const response = await axios.post('https://hardware-backend-gqcn.onrender.com/api/admin/add-product', product, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage(response.data.message);
