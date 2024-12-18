@@ -17,6 +17,7 @@ import AuthProvider from './context/AuthProvider';
 import PrivateRoute from './components/PrivateRoute';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import Checkout from './pages/Checkout';
+import Policy from './pages/Policy.jsx'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about" element={<About />} />
+            <Route path='/policy' element={<Policy />} />
             <Route path="/category/:category" element={<CategoryPage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/admin/login" element={<AdminLogin />} />
