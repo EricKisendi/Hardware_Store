@@ -1,11 +1,11 @@
 import { useAuth } from '../../context/useAuth'; // Import useAuth to access authentication context
-import useCart from '../../context/useCart'; // Import useCart to access cart context
+// import useCart from '../../context/useCart'; // Import useCart to access cart context
 import Dropdown from './Dropdown';
 import { Link } from 'react-router-dom'; // Correct import for 'Link'
 
 const MenuLinks = () => {
   const { user, logout } = useAuth(); // Destructure user and logout from the AuthContext
-  const { cart } = useCart(); // Destructure cart from the CartContext
+  // const { cart } = useCart(); // Destructure cart from the CartContext
 
   return (
     <>
@@ -14,14 +14,14 @@ const MenuLinks = () => {
       <Link to="/about" className="hover:text-yellow-500">About</Link>
       <Link to="/policy" className="hover:text-yellow-500">Policy</Link>
 
-      <Link to="/cart" className="relative hover:text-yellow-500 ml-4">
+      {/* <Link to="/cart" className="relative hover:text-yellow-500 ml-4">
         🛒 Cart
         {cart?.items?.length > 0 && (
           <span className="absolute -top-2 -right-3 bg-red-500 text-white rounded-full text-xs px-2">
             {cart.items.length}
           </span>
         )}
-      </Link>
+      </Link> */}
 
       {user ? (
         <>
